@@ -1,3 +1,5 @@
+# used for setting up the django with mysql.
+
 import mysql.connector
 
 dataBase = mysql.connector.connect(
