@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Record
 
-from .forms import SignUpForm
+from .forms import SignUpForm, AddCustomerRecordForm
 
 # Create your views here.
 def home(request):
@@ -39,7 +39,6 @@ def register_user(request):
 			form.save()
                   
 			# User authentication
-
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password1']
 			user = authenticate(username=username, password=password)
@@ -71,8 +70,24 @@ def delete_customer_record(request, pk):
         return redirect('home')
       
       else:
-           messages.success(request, "You must have the necessary authorization to access these records.")
+           messages.error(request, "You must have the necessary authorization to access these records.")
            return redirect('home')
            
+def add_customer_record(request):
+     form = AddCustomerRecordForm(request.POST or None)
+     if request.user.is_authenticated:
+          if request.method == "POST":
+               if form.is_valid():
+                    add_record = form.save()
+                    messages.success(request, "Customer record has beed added.")
+                    return redirect('home')
+               
+          return render(request, 'add_record.html', {'form': form})
+     else:
+          messages.error(request, "You must have the necessary authorization to access these records.")
+          return redirect('home')
+          
+
+
                            
       
