@@ -86,6 +86,22 @@ def add_customer_record(request):
      else:
           messages.error(request, "You must have the necessary authorization to access these records.")
           return redirect('home')
+     
+
+def update_customer_record(request, pk):
+     if request.user.is_authenticated:
+          current_record = Record.objects.get(id=pk)
+          form = AddCustomerRecordForm(request.POST or None, instance=current_record)
+
+          if form.is_valid():
+               form.save()
+               messages.success(request, "Customer record has been updated!")
+               return redirect('home')
+          return render(request, 'update_record.html', {'form': form})
+     else:
+               messages.error(request, "You must have the necessary authorization to access these records.")
+               return redirect('home')
+          
           
 
 
