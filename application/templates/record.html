@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Customer Record</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{ customer_record.first_name }} {{ customer_record.last_name }}</h4>
+
+        <h6> <b>Customer ID: </b>{{ customer_record.id }} </h6>
+      
+        <h6> {{ customer_record.email }} </h6>
+        <h6>{{ customer_record.phone }} </h6>
+        <h6> {{ customer_record.address }} </h6>
+        <h6> {{ customer_record.city }} </h6>
+        <h6> {{ customer_record.state }} </h6>
+        <h6> {{ customer_record.created_at }} </h6>
+    </div>
+</div>
+
+<br/>
+<a href="{% url 'home' %}" class="btn btn-secondary"> Go to home </a>    
+{% endblock %}
