@@ -1,0 +1,8 @@
+asgiref==3.7.2
+Django==5.0
+mysql-connector==2.2.9
+mysql-connector-python==8.2.0
+protobuf==4.21.12
+PyMySQL==1.1.0
+sqlparse==0.4.4
+typing_extensions==4.8.0
