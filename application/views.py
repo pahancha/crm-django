@@ -61,3 +61,18 @@ def customer_record(request, pk):
             messages.success(request, "You must have the necessary authorization to access these records.")
             return redirect('home')
       
+
+def delete_customer_record(request, pk):
+      if request.user.is_authenticated:
+            
+        delete = Record.objects.get(id=pk)
+        delete.delete()
+        messages.success(request, "Customer record deleted successfully.")
+        return redirect('home')
+      
+      else:
+           messages.success(request, "You must have the necessary authorization to access these records.")
+           return redirect('home')
+           
+                           
+      
